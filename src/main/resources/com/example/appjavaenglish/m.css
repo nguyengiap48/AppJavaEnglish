@@ -1,0 +1,164 @@
+
+.vbx-menu {
+    -fx-spacing: 20px;
+    -fx-alignment: BOTTOM_CENTER;
+    -fx-background-color: #ffe969;
+    -fx-background-radius: 10px;
+    -fx-padding: 20px;
+    -fx-border-style: solid ;
+    -fx-border-width: 2px;
+    -fx-border-color: #53005e;
+    -fx-border-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.2, 2.0,2);
+}
+.hbx-menu {
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.2, 2.0,2);
+}
+.hbx-menu .button {
+    -fx-background-color: #21ffec;
+    -fx-font-size: 16px;
+    -fx-text-fill: #595959;
+}
+.hbx-menu .button:hover{
+    -fx-background-color: linear-gradient(#9bf8e7, #ffffff);;
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 10px;
+    -fx-text-fill: black;
+    -fx-cursor: HAND;
+}
+Button {
+    -fx-background-color: #ff6200;
+    -fx-background-radius: 7px;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.2, 2.0,6);
+    -fx-text-fill: #ffecec;
+    -fx-font-style: italic;
+    -fx-font-weight: Bold ;
+    -fx-font-size: 20px;
+
+}
+Button:hover {
+    -fx-background-color:
+            #3c7fb1,
+            linear-gradient(#20bbf1, #e8f5fc),
+            linear-gradient(#1c82bd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+    -fx-background-insets: 0,1,2;
+    -fx-background-radius: 3,2,1;
+    -fx-text-fill: black;
+    -fx-cursor: HAND;
+}
+Button:pressed {
+    -fx-background-color: rgba(235, 19, 250, 0.4);
+    -fx-padding: 5;
+    -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
+}
+.btn-speaker {
+    -fx-background-color: transparent;
+    -fx-effect: none;
+}
+.content-view{
+    -fx-background-color: #fff85f;
+    -fx-background-radius: 10px ;
+}
+.background {
+    -fx-background-color: rgb(99, 255, 255);
+}
+.list-word {
+    -fx-background-radius: 10px;
+    -fx-border-radius: 10px;
+    /*-fx-background-color: #605d71;*/
+    -fx-background-color: #656565;
+    -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.8, 2.0,2);
+
+}
+.text-field {
+    -fx-background-radius: 7px;
+    -fx-background-color: rgb(163, 235, 244);
+    -fx-effect: dropshadow(three-pass-box, rgb(255, 255, 255), 5, 0.2, 2.0,2);
+}
+.list-cell {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-style: italic;
+    -fx-font-size: 15px;
+}
+.list-view .list-cell:selected {
+    -fx-background-color: lightblue;
+    -fx-text-fill: #000000;
+    -fx-background-radius: 10px;
+}
+.list-view .scroll-bar:vertical {
+    -fx-background-color: transparent;
+}
+.txtWord {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
+
+}
+.txtWord .scroll-bar{
+    -fx-background-color: transparent;
+
+}
+.web-view{
+
+}
+
+.txtTranslate {
+    -fx-background-radius: 5px;
+    -fx-border-style: solid;
+    -fx-border-width: 1px;
+    -fx-border-color: #53005e;
+    -fx-border-radius: 5px;
+    -fx-pref-width: 750px;
+    -fx-pref-height: 200px;
+    -fx-font-size: 20px;
+}
+.txtTranslate .scroll-bar{
+    -fx-background-color: transparent;
+}
+.pnAdd {
+    -fx-background-radius: 10px;
+    -fx-background-color: linear-gradient(#ff5353, #5656fb);
+}
+.pnSelectGame {
+    -fx-background-color: #ffb1bf;
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgb(1, 104, 104), 5, 0.8, 2.0,2);
+}
+.pnQuizGame {
+    -fx-background-color:  linear-gradient(to right, #ff7b29, #ffffff);
+    -fx-background-radius: 10px;
+}
+.vbxQuiz{
+    -fx-spacing: 20px;
+}
+.vbxQuiz .radio-button{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+}
+.pnQuizGame .button {
+    -fx-background-color: rgb(234, 234, 234);
+    -fx-text-fill: #000000;
+}
+.hbxLabel .label {
+    /*-fx-background-radius: 10px;*/
+    -fx-border-style: solid;
+    -fx-border-radius: 5px;
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-pref-width: 30px;
+    -fx-pref-height:30px ;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+}
+.gridBtn .button{
+    -fx-background-color: #36ff00;
+    -fx-background-radius: 5px;
+    -fx-min-height: 36px;
+    -fx-font-style: bold;
+    -fx-min-width:36px;
+    -fx-font-size: 15px;
+    -fx-font-weight: Bold;
+    -fx-text-fill: black;
+}
+

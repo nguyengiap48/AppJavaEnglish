@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="637.0" prefWidth="1029.0" styleClass="background" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.appjavaenglish.Controller">
+   <left>
+      <VBox prefHeight="609.0" prefWidth="211.0" styleClass="vbx-menu" BorderPane.alignment="CENTER">
+         <children>
+            <Label text="App English" textFill="#00ff12">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+            </Label>
+            <ImageView fitHeight="431.0" fitWidth="107.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/studying.png" />
+               </image>
+            </ImageView>
+            <Separator prefHeight="28.0" prefWidth="146.0" />
+            <Button fx:id="btnDictionary" mnemonicParsing="false" onAction="#btnDictionaryEvent" prefHeight="78.0" prefWidth="203.0" text="Dictionary">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/dictionary.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnTranslates" mnemonicParsing="false" onAction="#btnTranslateEvent" prefHeight="81.0" prefWidth="199.0" text="Translate">
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/google.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnGame" mnemonicParsing="false" onAction="#btnGameEvent" prefHeight="80.0" prefWidth="167.0" text="Game">
+               <graphic>
+                  <ImageView fitHeight="150.0" fitWidth="51.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/joystick.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="btnExit" mnemonicParsing="false" onAction="#btnExitEvent" prefHeight="74.0" prefWidth="167.0" text="Exit">
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@image/switch.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </VBox>
+   </left>
+   <padding>
+      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+   </padding>
+   <center>
+      <AnchorPane fx:id="acpContent" prefHeight="200.0" prefWidth="200.0" styleClass="content-view" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets left="10.0" />
+         </BorderPane.margin>
+         <children>
+            <BorderPane fx:id="contentView" layoutX="5.0" layoutY="4.0" prefHeight="609.0" prefWidth="779.0" styleClass="content-view" visible="false">
+               <center>
+                  <BorderPane prefHeight="525.0" prefWidth="549.0" BorderPane.alignment="CENTER">
+                     <top>
+                        <AnchorPane prefHeight="146.0" prefWidth="529.0" BorderPane.alignment="CENTER">
+                           <children>
+                              <TextArea fx:id="txtWord" editable="false" layoutX="145.0" layoutY="9.0" opacity="0.89" prefHeight="129.0" prefWidth="240.0" styleClass="txtWord">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="1.0" green="0.9936549067497253" />
+                                       </color></DropShadow>
+                                 </effect>
+                              </TextArea>
+                              <Button fx:id="btnSpeaker" layoutX="145.0" layoutY="86.0" mnemonicParsing="false" onAction="#btnSpeakerEvent" styleClass="btn-speaker">
+                                 <graphic>
+                                    <ImageView fitHeight="36.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@image/speaker.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </AnchorPane>
+                     </top>
+                     <BorderPane.margin>
+                        <Insets left="10.0" />
+                     </BorderPane.margin>
+                     <center>
+                        <Pane prefHeight="200.0" prefWidth="200.0" styleClass="pane" BorderPane.alignment="CENTER">
+                           <children>
+                              <WebView fx:id="webView" layoutY="3.0" opacity="0.9" prefHeight="379.0" prefWidth="549.0">
+                                 <effect>
+                                    <DropShadow>
+                                       <color>
+                                          <Color red="0.9644670486450195" green="1.0" />
+                                       </color></DropShadow>
+                                 </effect></WebView>
+                           </children>
+                        </Pane>
+                     </center>
+                  </BorderPane>
+               </center>
+               <left>
+                  <ListView fx:id="listView" onMouseClicked="#list" prefHeight="200.0" prefWidth="200.0" styleClass="list-word" BorderPane.alignment="CENTER" />
+               </left>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" />
+               </padding>
+               <top>
+                  <HBox alignment="CENTER_LEFT" prefHeight="71.0" prefWidth="759.0" spacing="20.0" styleClass="hbx-menu" BorderPane.alignment="CENTER">
+                     <children>
+                        <TextField fx:id="txtSearch" prefHeight="31.0" prefWidth="200.0" promptText="Search" />
+                        <Button mnemonicParsing="false" onAction="#btnAddUI" prefHeight="53.0" prefWidth="118.0" text="Add">
+                           <graphic>
+                              <ImageView fitHeight="41.0" fitWidth="44.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/add.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#btnDeleteEvent" prefHeight="49.0" prefWidth="120.0" text="Delete">
+                           <graphic>
+                              <ImageView fitHeight="51.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/delete.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                        <Button mnemonicParsing="false" onAction="#btnEditUI" prefHeight="52.0" prefWidth="123.0" text="Edit">
+                           <graphic>
+                              <ImageView fitHeight="42.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@image/update.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Button>
+                     </children>
+                  </HBox>
+               </top>
+            </BorderPane>
+            <AnchorPane fx:id="acpTranslate" layoutX="11.0" layoutY="10.0" prefHeight="597.0" prefWidth="767.0" visible="false">
+               <children>
+                  <TextArea fx:id="txtAreaVi" layoutX="12.0" layoutY="58.0" prefHeight="200.0" prefWidth="200.0" styleClass="txtTranslate" />
+                  <TextArea fx:id="txtAreaEn" disable="true" layoutX="12.0" layoutY="340.0" prefHeight="200.0" prefWidth="200.0" promptText="Bản dịch" style="-fx-opacity: 1.0;" styleClass="txtTranslate" />
+                  <Button layoutX="25.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Anh" textFill="WHITE" />
+                  <Button layoutX="25.0" layoutY="296.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Việt" />
+                  <ImageView fitHeight="86.0" fitWidth="83.0" layoutX="342.0" layoutY="257.0" opacity="0.64" pickOnBounds="true" preserveRatio="true">
+                     <effect>
+                        <DropShadow />
+                     </effect>
+                     <Image url="@image/loop.png" />
+                  </ImageView>
+                  <Button layoutX="101.0" layoutY="296.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Anh" textFill="WHITE" />
+                  <Button layoutX="101.0" layoutY="14.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="76.0" style="-fx-background-color: transparent;" text="Việt" />
+                  <Button layoutX="628.0" layoutY="274.0" mnemonicParsing="false" onAction="#translate" text="Dịch" />
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="acpAdd" layoutX="110.0" layoutY="54.0" prefHeight="420.0" prefWidth="512.0" style="-fx-background-color: ;" styleClass="pnAdd" visible="false">
+               <children>
+                  <TextField fx:id="txtId" layoutX="163.0" layoutY="33.0" promptText="Id" />
+                  <Button fx:id="btnX" layoutX="470.0" layoutY="-8.0" mnemonicParsing="false" onAction="#btnXEvent" prefHeight="37.0" prefWidth="26.0" style="-fx-background-color: transparent;" text="X">
+                     <font>
+                        <Font size="96.0" />
+                     </font></Button>
+                  <TextField fx:id="txtWords" layoutX="163.0" layoutY="105.0" promptText="Word" />
+                  <TextField fx:id="txtPronounce" layoutX="163.0" layoutY="317.0" promptText="Pronounce" />
+                  <TextField fx:id="txtDescription" layoutX="163.0" layoutY="246.0" promptText="Description" />
+                  <TextField fx:id="txtHtml" layoutX="163.0" layoutY="174.0" promptText="Html" />
+                  <Button layoutX="163.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnAddEvent" prefHeight="44.0" prefWidth="66.0" style="-fx-background-color: Gray;" text="Add" />
+                  <Button layoutX="285.0" layoutY="362.0" mnemonicParsing="false" onAction="#btnEditEvent" text="Edit" />
+                  <Label layoutX="36.0" layoutY="33.0" prefHeight="31.0" prefWidth="131.0" text="Id                :">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="99.0" prefHeight="31.0" prefWidth="119.0" text="Word          :">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="317.0" text="Pronounce :">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="246.0" text="Description:">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="36.0" layoutY="174.0" prefHeight="31.0" prefWidth="131.0" text="Html           :">
+                     <font>
+                        <Font name="System Bold Italic" size="21.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
+            <BorderPane fx:id="bdpGameSelect" layoutX="241.0" layoutY="183.0" prefHeight="252.0" prefWidth="305.0" styleClass="pnSelectGame" visible="false">
+               <top>
+                  <Button mnemonicParsing="false" onAction="#quizEnglish" prefHeight="48.0" prefWidth="144.0" text="English Quiz" BorderPane.alignment="CENTER">
+                     <BorderPane.margin>
+                        <Insets top="20.0" />
+                     </BorderPane.margin>
+                  </Button>
+               </top>
+               <center>
+                  <Button mnemonicParsing="false" onAction="#picToWord" prefHeight="48.0" prefWidth="144.0" text="Pic To Word" BorderPane.alignment="CENTER" />
+               </center>
+            </BorderPane>
+            <AnchorPane fx:id="acpQuiz" layoutX="41.0" layoutY="100.0" prefHeight="418.0" prefWidth="706.0" styleClass="pnQuizGame" visible="false">
+               <children>
+                  <Label fx:id="lblQuestion" layoutX="27.0" layoutY="61.0" prefHeight="39.0" prefWidth="652.0">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="btnBack" layoutX="133.0" layoutY="312.0" mnemonicParsing="false" onAction="#backEvent" text="Back" />
+                  <Button fx:id="btnNext" layoutX="307.0" layoutY="312.0" mnemonicParsing="false" onAction="#nextEvent" text="Next" />
+                  <Button fx:id="btnSubmit" layoutX="477.0" layoutY="312.0" mnemonicParsing="false" onAction="#submitEvent" text="Submit" />
+                  <VBox fx:id="vbxAnswer" layoutX="33.0" layoutY="108.0" prefHeight="186.0" prefWidth="546.0" styleClass="vbxQuiz" />
+                  <Label layoutX="286.0" layoutY="8.0" prefHeight="18.0" prefWidth="173.0" text="Quiz Test">
+                     <font>
+                        <Font name="System Bold Italic" size="27.0" />
+                     </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.0949999988079071" green="0.6785265803337097" blue="0.949999988079071" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color red="1.0" blue="0.8946700692176819" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
+                  </Label>
+               </children>
+            </AnchorPane>
+            <AnchorPane fx:id="acpPicToWord" layoutX="39.0" layoutY="30.0" prefHeight="558.0" prefWidth="710.0" visible="false">
+               <children>
+                  <HBox fx:id="hbxLabelWord" alignment="CENTER" layoutX="167.0" layoutY="342.0" prefHeight="56.0" prefWidth="375.0" spacing="10.0" styleClass="hbxLabel" />
+                  <GridPane fx:id="gridPaneBtn" hgap="40.0" layoutX="219.0" layoutY="421.0" prefHeight="90.0" prefWidth="244.0" styleClass="gridBtn">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="61.6" minHeight="6.713867187357891E-5" prefHeight="30.39998168945312" vgrow="SOMETIMES" />
+                      <RowConstraints maxHeight="60.79993286132812" minHeight="0.0" prefHeight="31.20001831054688" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="btnWord1" mnemonicParsing="false" />
+                        <Button fx:id="btnWord2" mnemonicParsing="false" GridPane.columnIndex="1" />
+                        <Button fx:id="btnWord3" mnemonicParsing="false" GridPane.columnIndex="2" />
+                        <Button fx:id="btnWord4" mnemonicParsing="false" GridPane.columnIndex="3" />
+                        <Button fx:id="btnWord5" mnemonicParsing="false" prefHeight="49.0" prefWidth="114.0" GridPane.columnIndex="4" />
+                        <Button fx:id="btnWord6" mnemonicParsing="false" GridPane.rowIndex="2" />
+                        <Button fx:id="btnWord7" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="btnWord8" mnemonicParsing="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button fx:id="btnWord9" mnemonicParsing="false" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                        <Button fx:id="btnWord10" mnemonicParsing="false" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                     </children>
+                  </GridPane>
+                  <Label fx:id="lblScore" alignment="CENTER" layoutX="620.0" layoutY="38.0" prefHeight="18.0" prefWidth="45.0" text="0">
+                     <font>
+                        <Font name="System Bold" size="21.0" />
+                     </font></Label>
+                  <BorderPane layoutX="165.0" layoutY="38.0" prefHeight="278.0" prefWidth="379.0">
+                     <center>
+                        <ImageView fx:id="imgPictureGame" fitHeight="278.0" fitWidth="378.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                           <image>
+                              <Image url="@pictureEnglish/mirror.jpg" />
+                           </image>
+                        </ImageView>
+                     </center>
+                  </BorderPane>
+               </children>
+            </AnchorPane>
+            <BorderPane fx:id="bdpHome" layoutX="34.0" prefHeight="555.0" prefWidth="719.0">
+               <top>
+                  <ImageView fitHeight="219.0" fitWidth="268.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@image/education.png" />
+                     </image>
+                     <effect>
+                        <DropShadow>
+                           <color>
+                              <Color red="0.8883247971534729" green="1.0" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </ImageView>
+               </top>
+               <center>
+                  <ImageView fitHeight="388.0" fitWidth="417.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@image/education1.png" />
+                     </image>
+                     <effect>
+                        <DropShadow offsetY="10.0">
+                           <color>
+                              <Color red="0.5423781871795654" green="0.6315789222717285" blue="0.1450292468070984" />
+                           </color></DropShadow>
+                     </effect>
+                  </ImageView>
+               </center>
+               <left>
+                  <ImageView fitHeight="173.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@image/alarm-clock.png" />
+                     </image>
+                     <effect>
+                        <DropShadow offsetX="-5.0" offsetY="10.0">
+                           <color>
+                              <Color red="0.41874465346336365" green="0.5157894492149353" blue="0.030565302819013596" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </ImageView>
+               </left>
+               <right>
+                  <ImageView fitHeight="237.0" fitWidth="177.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+                     <image>
+                        <Image url="@image/table-lamp.png" />
+                     </image>
+                     <effect>
+                        <DropShadow offsetX="10.0" offsetY="10.0">
+                           <color>
+                              <Color red="0.46170371770858765" green="0.4842105209827423" blue="0.034074075520038605" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                  </ImageView>
+               </right>
+            </BorderPane>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>
