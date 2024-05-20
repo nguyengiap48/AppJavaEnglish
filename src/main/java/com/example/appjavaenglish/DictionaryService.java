@@ -86,4 +86,63 @@ public class DictionaryService extends Mysql {
             e.printStackTrace();
         }
     }
+
+    public ArrayList<Dictionary> getAllWordVa() {
+        ArrayList<Dictionary> dictionaries = new ArrayList<>();
+        try {
+            String msql = "SELECT * FROM va";
+            PreparedStatement pstm = connection.prepareStatement(msql);
+            ResultSet resultSet = pstm.executeQuery();
+            while (resultSet.next()) {
+                Dictionary dictionary = new Dictionary();
+                dictionary.setId(resultSet.getInt(1));
+                dictionary.setWord(resultSet.getString(2));
+                dictionary.setHtml(resultSet.getString(3));
+                dictionary.setDescription(resultSet.getString(4));
+                dictionaries.add(dictionary);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return dictionaries;
+    }
+
+    public void updateDictionaryVa(Dictionary dictionary) {
+        String msql = "UPDATE va SET id = ?, html = ?, description=? WHERE word = ?";
+        try {
+            PreparedStatement pstm = connection.prepareStatement(msql);
+            pstm.setInt(1, dictionary.getId());
+            pstm.setString(2, dictionary.getHtml());
+            pstm.setString(3, dictionary.getDescription());
+            pstm.setString(4, dictionary.getWord());
+            pstm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteDictionaryVa(String word) {
+        String msql = "DELETE FROM va WHERE word = ?";
+        try {
+            PreparedStatement pstm = connection.prepareStatement(msql);
+            pstm.setString(1, word);
+            pstm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void addDictionaryVa(Dictionary dictionary) {
+        String msql = "INSERT INTO va VALUES (?,?,?,?)";
+        try {
+            PreparedStatement pstm = connection.prepareStatement(msql);
+            pstm.setInt(1, dictionary.getId());
+            pstm.setString(2, dictionary.getWord());
+            pstm.setString(3, dictionary.getHtml());
+            pstm.setString(4, dictionary.getDescription());
+            pstm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

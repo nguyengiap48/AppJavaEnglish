@@ -13,7 +13,7 @@ public class MySqlQuiz {
             String strConnect = "jdbc:mysql://localhost:3307/quizenglish";
             Properties properties = new Properties();
             properties.put("user", "root");
-            properties.put("password", "Giap0408.");
+            properties.put("password", "Giap04082004");
             Driver driver = new Driver();
             connection = driver.connect(strConnect, properties);
         } catch (Exception e) {

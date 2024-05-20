@@ -2,7 +2,9 @@
 .vbx-menu {
     -fx-spacing: 20px;
     -fx-alignment: BOTTOM_CENTER;
-    -fx-background-color: #ffe969;
+    /*-fx-background-color: #ffe969;*/
+    /*-fx-background-color: linear-gradient(#ea24ff, #64f1ff);*/
+    -fx-background-color: linear-gradient(#ff26dc, #64f1ff);
     -fx-background-radius: 10px;
     -fx-padding: 20px;
     -fx-border-style: solid ;
@@ -15,19 +17,21 @@
     -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.2, 2.0,2);
 }
 .hbx-menu .button {
-    -fx-background-color: #21ffec;
+    /*-fx-background-color: #21ffec;*/
+    -fx-background-color: linear-gradient(to right, #36f9ff, #fff7f7);
     -fx-font-size: 16px;
     -fx-text-fill: #595959;
 }
 .hbx-menu .button:hover{
-    -fx-background-color: linear-gradient(#9bf8e7, #ffffff);;
+    -fx-background-color: linear-gradient(to right,#9bf8e7, #ffffff);;
     -fx-background-insets: 0,1,2;
     -fx-background-radius: 10px;
     -fx-text-fill: black;
     -fx-cursor: HAND;
 }
 Button {
-    -fx-background-color: #ff6200;
+    /*-fx-background-color: #ff6200;*/
+     -fx-background-color: linear-gradient(to right,#ea24ff, #64f1ff);
     -fx-background-radius: 7px;
     -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.2, 2.0,6);
     -fx-text-fill: #ffecec;
@@ -37,17 +41,14 @@ Button {
 
 }
 Button:hover {
-    -fx-background-color:
-            #3c7fb1,
-            linear-gradient(#20bbf1, #e8f5fc),
-            linear-gradient(#1c82bd 0%, #d9f0fc 49%, #bee6fd 50%, #a7d9f5 100%);
+    -fx-background-color: linear-gradient(#d472f4, #ffffff);
     -fx-background-insets: 0,1,2;
     -fx-background-radius: 3,2,1;
     -fx-text-fill: black;
     -fx-cursor: HAND;
 }
 Button:pressed {
-    -fx-background-color: rgba(235, 19, 250, 0.4);
+    -fx-background-color: rgba(233, 124, 241);
     -fx-padding: 5;
     -fx-background-insets: 2 0 0 0,2 0 3 0,2 0 4 0,2 0 5 0;
 }
@@ -56,17 +57,22 @@ Button:pressed {
     -fx-effect: none;
 }
 .content-view{
-    -fx-background-color: #fff85f;
+    /*-fx-background-color: #fff85f;*/
     -fx-background-radius: 10px ;
+    /*-fx-background-color: linear-gradient(#ff772b, #fff12c);*/
+    /*-fx-background-color: linear-gradient(to right,#ea24ff, #64f1ff);*/
+    -fx-background-color: linear-gradient(to right,#ea24ff, #ff64b2);
 }
+
 .background {
-    -fx-background-color: rgb(99, 255, 255);
+    -fx-background-color: linear-gradient(#7354ff, #41e7fd);
 }
 .list-word {
     -fx-background-radius: 10px;
     -fx-border-radius: 10px;
     /*-fx-background-color: #605d71;*/
-    -fx-background-color: #656565;
+    /*-fx-background-color: #656565;*/
+    -fx-background-color: linear-gradient(#79d4f3, #e8f5fc);
     -fx-effect: dropshadow(three-pass-box, rgb(0, 50, 50), 5, 0.8, 2.0,2);
 
 }
@@ -77,12 +83,12 @@ Button:pressed {
 }
 .list-cell {
     -fx-background-color: transparent;
-    -fx-text-fill: white;
+    -fx-text-fill: #000000;
     -fx-font-style: italic;
     -fx-font-size: 15px;
 }
 .list-view .list-cell:selected {
-    -fx-background-color: lightblue;
+    -fx-background-color: #00bfff;
     -fx-text-fill: #000000;
     -fx-background-radius: 10px;
 }
@@ -118,16 +124,13 @@ Button:pressed {
 }
 .pnAdd {
     -fx-background-radius: 10px;
-    -fx-background-color: linear-gradient(#ff5353, #5656fb);
+    -fx-background-color: linear-gradient(#ff7777, #5656fb);
+
 }
 .pnSelectGame {
-    -fx-background-color: #ffb1bf;
+    -fx-background-color: #ff4065;
     -fx-background-radius: 10px;
-    -fx-effect: dropshadow(three-pass-box, rgb(1, 104, 104), 5, 0.8, 2.0,2);
-}
-.pnQuizGame {
-    -fx-background-color:  linear-gradient(to right, #ff7b29, #ffffff);
-    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(three-pass-box, rgb(1, 104, 104), 5, 0.8, -5,-5);
 }
 .vbxQuiz{
     -fx-spacing: 20px;
@@ -137,8 +140,9 @@ Button:pressed {
     -fx-font-weight: bold;
 }
 .pnQuizGame .button {
-    -fx-background-color: rgb(234, 234, 234);
+    -fx-background-color: rgb(113, 253, 248);
     -fx-text-fill: #000000;
+    -fx-background-radius: 5px;
 }
 .hbxLabel .label {
     /*-fx-background-radius: 10px;*/
@@ -160,5 +164,26 @@ Button:pressed {
     -fx-font-size: 15px;
     -fx-font-weight: Bold;
     -fx-text-fill: black;
+}
+.acpPicToWord .label {
+    -fx-border-style: solid;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-alignment: center;
+}
+
+.lblQuiz{
+    -fx-border-style: solid;
+    -fx-font-size: 21px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 4px;
+    -fx-alignment: center;
+}
+.btnAv{
+    -fx-background-color: rgba(0, 0, 0, 0.26);
+}
+.btnNone{
+    -fx-background-color: transparent;
 }
 

@@ -12,7 +12,7 @@ public class Mysql {
         try {
             String url = "jdbc:mysql://localhost:3307/dictionarydatabase";
             String user = "root";
-            String password = "Giap0408.";
+            String password = "Giap04082004";
             Properties props = new Properties();
             props.put("user", user);
             props.put("password", password);

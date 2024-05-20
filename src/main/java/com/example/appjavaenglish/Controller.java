@@ -1,14 +1,14 @@
 package com.example.appjavaenglish;
 
-import com.example.appjavaenglish.Dictionary;
-import com.example.appjavaenglish.DictionaryService;
-import com.sun.speech.freetts.Voice;
-import com.sun.speech.freetts.VoiceManager;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
+
 import javafx.collections.ObservableList;
-import javafx.concurrent.Worker;
+
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
@@ -19,8 +19,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+import javafx.scene.web.HTMLEditor;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.util.Duration;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
@@ -38,11 +41,13 @@ public class Controller {
     @FXML
     private WebView webView;
     @FXML
+    private HTMLEditor htmlEdit;
+    @FXML
     private WebEngine webEngine;
     @FXML
-    private Button btnSpeaker;
+    private Button btnSpeaker, btnSpeaker1, btnSpeaker2;
     @FXML
-    private Button btnDictionary,btnGame,btnTranslates,btnExit;
+    private Button btnDictionary,btnGame,btnTranslates,btnExit, btnX, btnAdd, btnEdit, btnDelete;
     @FXML
     private TextArea txtWord;
     @FXML
@@ -56,6 +61,10 @@ public class Controller {
     @FXML
     private AnchorPane acpPicToWord;
     @FXML
+    private AnchorPane acpHtmlEdit;
+    @FXML
+    private AnchorPane acpGame;
+    @FXML
     private GridPane gridPaneBtn;
     @FXML
     private TextField txtSearch;
@@ -64,17 +73,13 @@ public class Controller {
     @FXML
     private HBox hbxLabelWord;
     @FXML
-    private AnchorPane acpAdd;
-    @FXML
-    private Button btnX;
-    @FXML
     private BorderPane bdpGameSelect;
     @FXML
-    private RadioButton answerA, answerB, answerC, answerD;
+    private Label lblQuestion;
     @FXML
-    private Label lblQuestion,lblScore;
+    private ImageView imgEngVi;
     @FXML
-    private TextField txtId, txtWords, txtHtml, txtDescription, txtPronounce;
+    private Label lblScore, lblLevel, lblTime, lblHighScore, lblQues, lblTimeQuiz;
     @FXML
     private Button btnNext, btnBack, btnSubmit;
     @FXML
@@ -83,6 +88,9 @@ public class Controller {
     private Button btnWord1, btnWord2, btnWord3, btnWord4, btnWord5, btnWord6, btnWord7, btnWord8, btnWord9, btnWord10;
     @FXML
     private TextArea txtAreaVi, txtAreaEn;
+    @FXML
+    private Button btnA1, btnV1, btnA2, btnV2;
+    private Boolean english = true;
     private Label lblWord[] = new Label[10];
     private ArrayList<Dictionary> list = new ArrayList<>();
     private HashMap<String, String> map = new LinkedHashMap<>();
@@ -90,8 +98,10 @@ public class Controller {
     private RadioButton[][] rbtnAnswer = new RadioButton[10][4];
     private ArrayList<Quiz> quizList = new QuizService().getAllQuiz();
     private ArrayList<PictureToWord> listPicture = new PicToWordService().getAllPic();
-    int count = 1;
-    int score =0;
+    private int count = 1;
+    private int score =0, level=1, time = 0;
+    private static int highScore = 0;
+    private Timeline timeline = new Timeline();
 
     public void initialize() {
         showAllWord();
@@ -101,12 +111,12 @@ public class Controller {
         acpContent.setLeftAnchor(contentView, 0.0);
         acpContent.setRightAnchor(contentView, 0.0);
 
-        DictionaryService dictionaryService = new DictionaryService();
-        ArrayList<String> listWord = new ArrayList<>();
-        for (Dictionary dictionary : dictionaryService.getAllWordAv()) {
-            listWord.add(dictionary.getWord());
-        }
-        observableList = FXCollections.observableArrayList(listWord);
+//        DictionaryService dictionaryService = new DictionaryService();
+//        ArrayList<String> listWord = new ArrayList<>();
+//        for (Dictionary dictionary : dictionaryService.getAllWordAv()) {
+//            listWord.add(dictionary.getWord());
+//        }
+//        observableList = FXCollections.observableArrayList(listWord);
 
         txtSearch.textProperty().addListener((observable, oldValue, newValue) -> {
             listView.getItems().clear();
@@ -122,37 +132,42 @@ public class Controller {
     }
 
     public void showAllWord() {
-
-        DictionaryService dictionaryService = new DictionaryService();
-        list = dictionaryService.getAllWordAv();
-        ArrayList<String> listWord = new ArrayList<>();
-        for (Dictionary dictionary : list) {
-            listWord.add(dictionary.getWord());
-            map.put(dictionary.getWord(), dictionary.getHtml());
+        if (english) {
+            DictionaryService dictionaryService = new DictionaryService();
+            list = dictionaryService.getAllWordAv();
+            ArrayList<String> listWord = new ArrayList<>();
+            for (Dictionary dictionary : list) {
+                listWord.add(dictionary.getWord());
+                map.put(dictionary.getWord(), dictionary.getHtml());
+            }
+            observableList = FXCollections.observableArrayList(listWord);
+            listView.getItems().clear();
+            for (String item : observableList) {
+                listView.getItems().add(item);
+            }
+        } else {
+            DictionaryService dictionaryService = new DictionaryService();
+            list = dictionaryService.getAllWordVa();
+            ArrayList<String> listWord = new ArrayList<>();
+            for (Dictionary dictionary : list) {
+                listWord.add(dictionary.getWord());
+                map.put(dictionary.getWord(), dictionary.getHtml());
+            }
+            observableList = FXCollections.observableArrayList(listWord);
+            listView.getItems().clear();
+            for (String item : observableList) {
+                listView.getItems().add(item);
+            }
         }
-        observableList = FXCollections.observableArrayList(listWord);
-        listView.setItems(observableList);
-
-
-//        map.put(list.get(index).getWord(), list.get(index).getHtml());
     }
 
-    public void speakWord(String word) {
-        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_us_kal.KevinVoiceDirectory");
-//        System.setProperty("freetts.voices", "com.sun.speech.freetts.en.us.cmu_time_awb.AlanVoiceDirectory");
-        VoiceManager voiceManager = VoiceManager.getInstance();
-        Voice voice = voiceManager.getVoice("kevin16");
-//        Voice voice = voiceManager.getVoice("alan");
-
-        if (voice != null) {
-            voice.allocate();
-            voice.speak(word);
-        } else {
-            System.err.println("Cannot find the specified voice.");
-        }
+    public void speakWords(String word, String language) throws Exception {
+        TextToSpeech textToSpeech = new TextToSpeech();
+        textToSpeech.speakWord(word, language);
     }
 
     public void quizGame() {
+        level = 1;
         for (int i = 0; i < 10; i++) {
             toggleGroup[i] = new ToggleGroup();
             for (int j = 0; j < 4; j++) {
@@ -160,6 +175,38 @@ public class Controller {
                 rbtnAnswer[i][j].setToggleGroup(toggleGroup[i]);
             }
         }
+        count=1;
+
+        int count1 = 300;
+        timeline.stop();
+        timeline = new Timeline();
+        lblTimeQuiz.setText("Time: 300s");
+
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+                    int countTime = count1;
+                    @Override
+                    public void handle(ActionEvent event) {
+                        countTime--;
+                        if (countTime >= 0) {
+                            lblTimeQuiz.setText("Time: " + countTime + "s");
+                        } else if (countTime<0){
+                            timeline.stop();
+                            lblTimeQuiz.setText("Time: 0s");
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Score");
+                            alert.setHeaderText(null);
+                            alert.setContentText("Điểm của bạn là:" + scoreQuiz());
+                            alert.show();
+                            bdpGameSelect.setVisible(true);
+                            acpQuiz.setVisible(false);
+                        }
+                    }
+                })
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     public void picToWordGame() {
@@ -183,6 +230,7 @@ public class Controller {
     }
 
     private void handleBtn(String x, Button button) {
+
         StringBuilder word = new StringBuilder("");
         for (int i = 0; i < listPicture.get(count).getWordCorrect().length(); i++) {
             if (lblWord[i].getText().isEmpty()) {
@@ -201,10 +249,14 @@ public class Controller {
             alert.setContentText("Correct");
             alert.show();
             score +=10;
+            if (highScore<100&&score>highScore)
+                highScore =score;
+
             if (count == 9) {
                 lblScore.setText(String.valueOf(score));
             }
             if (count < 9) {
+                level++;
                 count++;
                 handleGamePicToWord();
             }
@@ -244,7 +296,40 @@ public class Controller {
     }
 
     private void handleGamePicToWord() {
-        lblScore.setText(String.valueOf(score));
+        lblLevel.setText("Level: " + level);
+        int count1 = 60;
+        timeline.stop();
+        timeline = new Timeline();
+        lblTime.setText("Time: 60s");
+
+        timeline.getKeyFrames().add(
+                new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
+                    int countTime = count1;
+                    @Override
+                    public void handle(ActionEvent event) {
+                        countTime--;
+                        if (countTime >= 0) {
+                            lblTime.setText("Time: " + countTime + "s");
+                        } else if (countTime<0){
+                            timeline.stop();
+                            lblTime.setText("Time: 0s");
+
+                            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                            alert.setTitle("Fail");
+                            alert.setHeaderText(null);
+                            alert.setContentText("You lose");
+                            alert.show();
+                            bdpGameSelect.setVisible(true);
+                            acpPicToWord.setVisible(false);
+                        }
+                    }
+                })
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
+
+        lblHighScore.setText("HighScore: " + highScore);
+        lblScore.setText("Score: " + score);
         PictureToWord pictureToWord = listPicture.get(count);
         String a = "file:/D:/AppEnglish/AppJavaEnglish/target/classes/com/example/appjavaenglish/"+pictureToWord.getImage();
         imgPictureGame.setImage(null);
@@ -281,7 +366,7 @@ public class Controller {
     @FXML
     public void btnGameEvent(ActionEvent event) {
 //        btnGame.setDisable(true);
-        bdpGameSelect.setVisible(true);
+        acpGame.setVisible(true);
         contentView.setVisible(false);
         acpTranslate.setVisible(false);
         acpPicToWord.setVisible(false);
@@ -292,15 +377,17 @@ public class Controller {
 
     @FXML
     public void quizEnglish(ActionEvent event) {
+
         quizGame();
         handleNextAndBack();
         acpQuiz.setVisible(true);
-        bdpGameSelect.setVisible(false);
+        acpGame.setVisible(false);
     }
 
     @FXML
     public void picToWord(ActionEvent event) {
         count = 0;
+        level=1;
         score = 0;
         picToWordGame();
         handleGamePicToWord();
@@ -310,24 +397,37 @@ public class Controller {
 //        alert.setContentText(imgPictureGame.getImage().getUrl());
 //        alert.show();
 
-        bdpGameSelect.setVisible(false);
+        acpGame.setVisible(false);
         acpPicToWord.setVisible(true);
     }
 
     @FXML
     public void nextEvent(ActionEvent event) {
         count++;
+        level++;
         handleNextAndBack();
     }
 
     @FXML
     public void backEvent(ActionEvent event) {
         count--;
+        level--;
         handleNextAndBack();
     }
 
     @FXML
     public void submitEvent(ActionEvent event) {
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Score");
+        alert.setHeaderText(null);
+        alert.setContentText("Chúc mừng bạn đạt được: " + scoreQuiz());
+        alert.show();
+        acpGame.setVisible(true);
+        acpQuiz.setVisible(false);
+    }
+
+    public int scoreQuiz() {
         int score = 0;
         if (rbtnAnswer[0][1].isSelected()) {
             score++;
@@ -359,16 +459,11 @@ public class Controller {
         if (rbtnAnswer[9][3].isSelected()) {
             score++;
         }
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Score");
-        alert.setHeaderText(null);
-        alert.setContentText("Chúc mừng bạn đạt được: " + score);
-        alert.show();
-        bdpGameSelect.setVisible(true);
-        acpQuiz.setVisible(false);
+        return score;
     }
 
     private void handleNextAndBack() {
+        lblQues.setText("Question: "+level);
         Quiz quiz = quizList.get(count - 1);
 
         lblQuestion.setText(quiz.getId() + ": " + quiz.getQuestion());
@@ -399,7 +494,6 @@ public class Controller {
 
         webEngine = webView.getEngine();
 
-
         Document document = Jsoup.parse(map.get(listView.getSelectionModel().getSelectedItem()));
 
         Elements h1 = document.select("h1");
@@ -417,28 +511,34 @@ public class Controller {
 
     @FXML
     public void btnDictionaryEvent(ActionEvent event) {
+        timeline.stop();
         contentView.setVisible(true);
         acpTranslate.setVisible(false);
         acpQuiz.setVisible(false);
-        bdpGameSelect.setVisible(false);
+        acpGame.setVisible(false);
         acpPicToWord.setVisible(false);
         bdpHome.setVisible(false);
     }
 
     @FXML
     public void btnTranslateEvent(ActionEvent event) {
+        timeline.stop();
         contentView.setVisible(false);
         acpTranslate.setVisible(true);
         acpQuiz.setVisible(false);
-        bdpGameSelect.setVisible(false);
+        acpGame.setVisible(false);
         acpPicToWord.setVisible(false);
         bdpHome.setVisible(false);
     }
 
     @FXML
-    public void btnSpeakerEvent(ActionEvent event) {
+    public void btnSpeakerEvent(ActionEvent event) throws Exception {
         int x = listView.getSelectionModel().getSelectedIndex();
-        speakWord(list.get(x).getWord());
+        if (english){
+            speakWords(list.get(x).getWord(), "en-gb");
+        } else {
+            speakWords(list.get(x).getWord(), "vi-VN");
+        }
     }
 
     @FXML
@@ -473,13 +573,18 @@ public class Controller {
     public void btnAddEvent(ActionEvent event) {
         DictionaryService dictionaryService = new DictionaryService();
         Dictionary dictionary = new Dictionary();
-        dictionary.setId(Integer.parseInt(txtId.getText()));
-        dictionary.setWord(txtWords.getText());
-        dictionary.setHtml(txtHtml.getText());
-        dictionary.setDescription(txtDescription.getText());
-        dictionary.setPronounce(txtPronounce.getText());
-        map.put(txtWords.getText(), txtHtml.getText());
-        observableList.add(txtWords.getText());
+
+        Document document = Jsoup.parse(htmlEdit.getHtmlText());
+        Elements h1 = document.select("h1");
+        Elements h3 = document.select("h3");
+
+
+        dictionary.setWord(h1.text());
+        dictionary.setHtml(htmlEdit.getHtmlText());
+
+        dictionary.setPronounce(h3.text());
+        map.put(h1.text(), htmlEdit.getHtmlText());
+        observableList.add(h1.text());
 
         listView.getItems().clear();
 
@@ -493,62 +598,157 @@ public class Controller {
         alert.setHeaderText(null);
         alert.setContentText("word");
         alert.show();
-        acpAdd.setVisible(false);
+        acpHtmlEdit.setVisible(false);
     }
 
     @FXML
     public void btnAddUI(ActionEvent event) {
-        acpAdd.setVisible(true);
-    }
-
-    @FXML
-    public void btnXEvent(ActionEvent event) {
-        acpAdd.setVisible(false);
-        contentView.setVisible(true);
+//        acpAdd.setVisible(true);
+        acpHtmlEdit.setVisible(true);
+        htmlEdit.setHtmlText("<html> <h1>Nhập từ:</h1><b><h3>Phát âm:</h3></b>"
+                + "<ul><li><b><i> loại từ: </i></b><ul><li><font color='#cc0000'><b> Nghĩa thứ nhất: </b></font><ul></li></ul></ul></li></ul><ul><li><b><i>loại từ khác: </i></b><ul><li><font color='#cc0000'><b> Nghĩa thứ hai: </b></font></li></ul></li></ul></html>");
     }
 
     @FXML
     public void btnEditUI(ActionEvent event) {
-        DictionaryService dictionaryService = new DictionaryService();
-        Dictionary dictionary = dictionaryService.searchByWordAv(listView.getSelectionModel().getSelectedItem());
-        txtId.setText(String.valueOf(dictionary.getId()));
-        txtWords.setText(dictionary.getWord());
-        txtHtml.setText(dictionary.getHtml());
-        txtDescription.setText(dictionary.getDescription());
-        txtPronounce.setText(dictionary.getPronounce());
-        acpAdd.setVisible(true);
+        htmlEdit.setHtmlText(map.get(listView.getSelectionModel().getSelectedItem()));
+        acpHtmlEdit.setVisible(true);
     }
 
     @FXML
     public void btnEditEvent(ActionEvent event) {
         DictionaryService dictionaryService = new DictionaryService();
+
+        Document document = Jsoup.parse(htmlEdit.getHtmlText());
+        Elements h1 = document.select("h1");
+        Elements h3 = document.select("h3");
+
         Dictionary dictionary = new Dictionary();
-        dictionary.setId(Integer.parseInt(txtId.getText()));
-        dictionary.setWord(txtWords.getText());
-        dictionary.setHtml(txtHtml.getText());
-        dictionary.setDescription(txtDescription.getText());
-        dictionary.setPronounce(txtPronounce.getText());
-        map.replace(txtWords.getText(), txtHtml.getText());
+
+        dictionary.setWord(h1.text());
+        dictionary.setHtml(htmlEdit.getHtmlText());
+//        dictionary.setDescription(txtDescription.getText());
+        dictionary.setPronounce(h3.text());
+        map.replace(h1.text(), htmlEdit.getHtmlText());
         dictionaryService.updateDictionaryAv(dictionary);
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Edit Dictionary");
         alert.setHeaderText(null);
         alert.setContentText("word");
         alert.show();
-        acpAdd.setVisible(false);
+        acpHtmlEdit.setVisible(false);
     }
     @FXML
     public void translate(ActionEvent event) {
         ApiTextTranSlate apiTextTranslate = new ApiTextTranSlate();
         try {
-            String text = apiTextTranslate.translate(txtAreaVi.getText());
-            txtAreaEn.setText(text);
+            if(btnA1.getStyleClass().contains("btnNone")){
+                String text = apiTextTranslate.googleTranslate("","en",txtAreaVi.getText());
+                txtAreaEn.setText(text);
+            } else if (btnA2.getStyleClass().contains("btnNone")) {
+                String text = apiTextTranslate.googleTranslate("","vi",txtAreaVi.getText());
+                txtAreaEn.setText(text);
+            }
         } catch (Exception exception) {
             exception.printStackTrace();
         }
     }
+
+    @FXML
+    public void btnAvEvent(ActionEvent event) {
+        if (!btnA1.getStyleClass().contains("btnAv")){
+            btnA1.getStyleClass().add("btnAv");
+            btnV2.getStyleClass().add("btnAv");
+        }
+        btnA1.getStyleClass().remove("btnNone");
+        btnV2.getStyleClass().remove("btnNone");
+        if (!btnA2.getStyleClass().contains("btnNone")){
+            btnA2.getStyleClass().add("btnNone");
+            btnV1.getStyleClass().add("btnNone");
+        }
+
+    }
+
+    @FXML
+    public void btnVaEvent(ActionEvent event) {
+        if (!btnA2.getStyleClass().contains("btnAv")) {
+            btnA2.getStyleClass().add("btnAv");
+            btnV1.getStyleClass().add("btnAv");
+        }
+        btnA2.getStyleClass().remove("btnNone");
+        btnV1.getStyleClass().remove("btnNone");
+        if (!btnA1.getStyleClass().contains("btnNone")) {
+            btnA1.getStyleClass().add("btnNone");
+            btnV2.getStyleClass().add("btnNone");
+        }
+    }
+
+    @FXML
+    public void btnXEvent(ActionEvent event){
+        acpHtmlEdit.setVisible(false);
+    }
+
+    @FXML
+    public void btnSpeaker1(ActionEvent event) throws Exception {
+        String word = txtAreaVi.getText();
+        if (!btnA1.getStyleClass().contains("btnNone")) {
+            speakWords(word, "en-gb");
+        } else {
+            speakWords(word, "vi-VN");
+        }
+    }
+
+    @FXML
+    public void btnSpeaker2(ActionEvent event) throws Exception {
+        String word = txtAreaEn.getText();
+        if (!btnV2.getStyleClass().contains("btnNone")) {
+            speakWords(word, "vi-VN");
+        } else {
+            speakWords(word, "en-gb");
+        }
+    }
+
+    @FXML
+    public void handleEngToVi(MouseEvent event) {
+        if (english){
+            String a = "file:/D:/AppEnglish/AppJavaEnglish/target/classes/com/example/appjavaenglish/image/eng-viet.png";
+            imgEngVi.setImage(new Image(a));
+            english = false;
+            btnDictionary.setText("Từ Điển");
+            btnGame.setText("Trò Chơi");
+            btnTranslates.setText("Dịch");
+            btnAdd.setText("Thêm");
+            btnDelete.setText("Xóa từ");
+            btnEdit.setText("Sửa từ");
+            txtSearch.setPromptText("Tìm kiếm");
+            showAllWord();
+        } else {
+            english = true;
+            String a = "file:/D:/AppEnglish/AppJavaEnglish/target/classes/com/example/appjavaenglish/image/viet-eng.png";
+            imgEngVi.setImage(new Image(a));
+            btnDictionary.setText("Dictionary");
+            btnGame.setText("Game");
+            btnTranslates.setText("Translate");
+            btnAdd.setText("Add");
+            btnDelete.setText("Delete");
+            btnEdit.setText("Edit");
+            txtSearch.setPromptText("Search");
+            showAllWord();
+        }
+
+
+    }
+
     @FXML
     public void btnExitEvent(ActionEvent event) {
+        Document document = Jsoup.parse(map.get(listView.getSelectionModel().getSelectedItem()));
+        Elements h1 = document.select("h1");
+        Elements h3 = document.select("h3");
 
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Exit");
+        alert.setHeaderText(null);
+        alert.setContentText(h1.text()+"\n "+h3.text());
+        alert.show();
     }
 }

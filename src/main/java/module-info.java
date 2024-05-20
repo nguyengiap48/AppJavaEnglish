@@ -13,6 +13,8 @@ module com.example.appjavaenglish {
     requires freetts;
     requires java.net.http;
     requires org.json;
+    requires voicerss.tts;
+    requires java.desktop;
 
     opens com.example.appjavaenglish to javafx.fxml;
     exports com.example.appjavaenglish;
