@@ -3,6 +3,7 @@ package com.example.appjavaenglish;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 
 import javafx.collections.ObservableList;
@@ -127,8 +128,6 @@ public class Controller {
                 }
             }
         });
-
-
     }
 
     public void showAllWord() {
@@ -222,7 +221,8 @@ public class Controller {
                 Button button = (Button) node;
                 button.setOnAction(event -> {
                     String x = button.getText();
-                    button.setVisible(false);
+
+//                    button.setVisible(false);
                     handleBtn(x,button);
                 });
             }
@@ -235,6 +235,7 @@ public class Controller {
         for (int i = 0; i < listPicture.get(count).getWordCorrect().length(); i++) {
             if (lblWord[i].getText().isEmpty()) {
                 lblWord[i].setText(x);
+                button.setVisible(false);
                 break;
             }
         }
@@ -365,14 +366,14 @@ public class Controller {
 
     @FXML
     public void btnGameEvent(ActionEvent event) {
-//        btnGame.setDisable(true);
+
         acpGame.setVisible(true);
         contentView.setVisible(false);
         acpTranslate.setVisible(false);
         acpPicToWord.setVisible(false);
         bdpHome.setVisible(false);
-//        quizGame();
-//        handleNextAndBack();
+        acpQuiz.setVisible(false);
+
     }
 
     @FXML
@@ -391,11 +392,6 @@ public class Controller {
         score = 0;
         picToWordGame();
         handleGamePicToWord();
-//        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//        alert.setTitle("DELETE");
-//        alert.setHeaderText(null);
-//        alert.setContentText(imgPictureGame.getImage().getUrl());
-//        alert.show();
 
         acpGame.setVisible(false);
         acpPicToWord.setVisible(true);
@@ -533,11 +529,11 @@ public class Controller {
 
     @FXML
     public void btnSpeakerEvent(ActionEvent event) throws Exception {
-        int x = listView.getSelectionModel().getSelectedIndex();
+        String x = listView.getSelectionModel().getSelectedItem();
         if (english){
-            speakWords(list.get(x).getWord(), "en-gb");
+            speakWords(x, "en-gb");
         } else {
-            speakWords(list.get(x).getWord(), "vi-VN");
+            speakWords(x, "vi-VN");
         }
     }
 
@@ -741,14 +737,6 @@ public class Controller {
 
     @FXML
     public void btnExitEvent(ActionEvent event) {
-        Document document = Jsoup.parse(map.get(listView.getSelectionModel().getSelectedItem()));
-        Elements h1 = document.select("h1");
-        Elements h3 = document.select("h3");
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Exit");
-        alert.setHeaderText(null);
-        alert.setContentText(h1.text()+"\n "+h3.text());
-        alert.show();
+        Platform.exit();
     }
 }
